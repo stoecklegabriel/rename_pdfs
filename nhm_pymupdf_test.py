@@ -12,6 +12,17 @@ from pathlib import Path
 #)
 
 PDF_FOLDER = Path("test_pdfs")
+print("DEBUG START")
+print("Arbeitsverzeichnis:", Path.cwd())
+print("PDF_FOLDER:", PDF_FOLDER)
+print("Existiert:", PDF_FOLDER.exists())
+print("Dateien:")
+
+for f in PDF_FOLDER.iterdir():
+    print("  ", f.name)
+
+print("DEBUG ENDE")
+
 print("Arbeitsverzeichnis:", Path.cwd())
 print("PDF-Ordner:", PDF_FOLDER.resolve())
 print("Ordner existiert:", PDF_FOLDER.exists())
