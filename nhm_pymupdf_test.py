@@ -12,7 +12,9 @@ from pathlib import Path
 #)
 
 PDF_FOLDER = Path("test_pdfs")
-
+print("Arbeitsverzeichnis:", Path.cwd())
+print("PDF-Ordner:", PDF_FOLDER.resolve())
+print("Ordner existiert:", PDF_FOLDER.exists())
 OUTPUT_CSV = "0005_Analyse.csv"
 
 MAX_FILES = 200
