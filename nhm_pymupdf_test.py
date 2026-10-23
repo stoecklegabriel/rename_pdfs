@@ -7,9 +7,11 @@ from pathlib import Path
 # KONFIGURATION
 # ==========================================================
 
-PDF_FOLDER = Path(
-    r"C:\PDFS\0005_20080607_bis_20081206"
-)
+# PDF_FOLDER = Path(
+#    r"C:\PDFS\0005_20080607_bis_20081206"
+#)
+
+PDF_FOLDER = Path("test_pdfs")
 
 OUTPUT_CSV = "0005_Analyse.csv"
 
