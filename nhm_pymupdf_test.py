@@ -150,6 +150,12 @@ pdfs = sorted(
 
 pdfs = pdfs[:MAX_FILES]
 
+print("PDF_FOLDER =", PDF_FOLDER.resolve())
+print("Anzahl PDFs =", len(pdfs))
+
+for pdf in pdfs:
+    print(pdf.name)
+
 print(
     f"{len(pdfs)} PDFs gefunden"
 )
