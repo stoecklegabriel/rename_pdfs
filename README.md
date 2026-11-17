@@ -151,4 +151,6 @@ Das Projekt zeigt, dass sich ein großer Bestand wissenschaftlicher PDF-Dateien 
 
 - Analyse ausschließlich der ersten ein bis zwei Seiten
 - Offizielle API-Anbindung statt Session-Token
-- Verbesserte Behandlung von OCR- und
+- Verbesserte Behandlung von OCR- und Scan-Dokumenten
+- Automatische Umbenennung nach manueller Freigabe
+- Integration in bestehende NHM-Workflows
