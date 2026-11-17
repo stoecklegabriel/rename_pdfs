@@ -66,29 +66,29 @@ Gesamtauswertung
 
 ##*Vorgehensweise
 
-1.*PDF-Dateien mit **PyMuPDF** ein*esen.
-2. Text aus den Dokument*n extrahieren.
-3. Extr*hierten Text auf maximal 15.000 Ze*chen*begrenzen:
+1. PDF-Dateien mit **PyMuPDF** einlesen.
+2. Text aus den Dokumenten extrahieren.
+3. Extrahierten Text auf maximal 15.000 Zeichen begrenzen:
 
 ```python
 text =*text[:15000]
 ```
 
-4. Über*ittlung des Textes an ein lokales *LM*
+4. Übermittlung des Textes an ein lokales LM
 5. Extraktion von:
    - Nach*amen
    - Initialen
-   - Publ*kationsjahr
+   - Publikationsjahr
    - Titel
-6. Er*eugung eines NHM-konformen Dateina*ens*
-7. Speicherung der Ergebnisse in *iner CSV-Date*.
+6. Erzeugung eines NHM-konformen Dateinamens
+7. Speicherung der Ergebnisse in einer CSV-Date.
 
 ## Namenskon*ention
 
 ### Eine Autorin /*ein Autor
 
 ```text
-Nach*ame_Initialen_Jahr_Titelwort*_Titelwort2_Titel*ort3_Titelwort4_Titelwort5*pdf
+Nach*ame_Initialen_Jahr_Titelwort_Titelwort2_Titel*ort3_Titelwort4_Titelwort5.pdf
 ```
 
 Beispiel:
@@ -99,10 +99,10 @@ Beispiel:
 ### Zwei*Autor*innen
 
 ```text
-Nach*ame1_Initialen_&_Nachname2*Initialen_Jahr_Titel.pdf
+Nachname1_Initialen_&_Nachname2_Initialen_Jahr_Titel.pdf
 ``*
 
 Beispiel:
 
 ```text
-Lawrence*JM_&_Pomory_CM_1999*Anterior-posterior_asymmetry_in_th**
+Lawrence_JM_&_Pomory_CM_1999_Anterior-posterior_asymmetry_in_th**
