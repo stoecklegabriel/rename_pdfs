@@ -1,12 +1,22 @@
 # NHM PDF Renamer
 
-Python-Skript zur automatischen Ermittlung NHM-konformer Dateinamen aus wissenschaftlichen PDF-Dateien mithilfe von PyMuPDF und einem lokalen Large Language Model (LLM).
+Automatische Ermittlung NHM-konformer Dateinamen aus wissenschaftlichen PDF-Dateien mithilfe von Python, PyMuPDF und einem lokalen Large Language Model (LLM).
 
-## Hintergrund
+## Überblick
 
-Für einen Bestand von **3.290 wissenschaftlichen PDF-Dateien** sollten Autor*innen, Publikationsjahr und Titel automatisch erkannt werden, um Dateinamen nach einem einheitlichen NHM-Schema zu erzeugen.
+Dieses Projekt wurde entwickelt, um große Bestände wissenschaftlicher PDF-Dateien effizient nach einem einheitlichen Schema zu benennen.
 
-Beispiel:
+Da Autorinnen und Autoren, Publikationsjahr und Titel häufig nicht zuverlässig in den PDF-Metadaten hinterlegt sind und wissenschaftliche Publikationen sehr unterschiedliche Layouts aufweisen, nutzt das Skript ein Large Language Model zur Extraktion der benötigten bibliographischen Informationen.
+
+## Namensschema
+
+Dateien werden nach folgendem Muster benannt:
+
+```text
+Nachname_Initialen_Jahr_Erste_Fünf_Titelwörter.pdf
+```
+
+### Beispiele
 
 ```text
 Mah_CL_2006_A_new_species_of_Xyloplax.pdf
@@ -16,19 +26,36 @@ Lawrence_JM_&_Pomory_CM_1999_Anterior-posterior_asymmetry_in_the_Aristotles_lant
 Shen_Z_et_al_2024_Three_New_Species_of_deep-sea.pdf
 ```
 
-Die benötigten Informationen liegen in wissenschaftlichen Publikationen häufig nicht als strukturierte Metadaten vor. Insbesondere ältere Arbeiten weisen sehr unterschiedliche Layouts und Formatierungen auf, wodurch regelbasierte Verfahren oft an ihre Grenzen stoßen.
+### Regeln
 
-## Ziel
+#### Eine Autorin / ein Autor
 
-Automatische Ermittlung von:
+```text
+Nachname_Initialen_Jahr_Titel.pdf
+```
 
-- Autor*innen
-- Publikationsjahr
-- Titel
+#### Zwei Autorinnen / Autoren
 
-und Erzeugung NHM-konformer Dateinamenvorschläge.
+```text
+Nachname1_Initialen_&_Nachname2_Initialen_Jahr_Titel.pdf
+```
 
-## Technischer Ablauf
+#### Drei oder mehr Autorinnen / Autoren
+
+```text
+Nachname1_Initialen_et_al_Jahr_Titel.pdf
+```
+
+Weitere Regeln:
+
+- Es werden nur die ersten fünf Titelwörter verwendet.
+- Leerzeichen werden durch Unterstriche ersetzt.
+- Diakritische Zeichen werden normalisiert.
+- Die Umlaute ä, ö und ü bleiben erhalten.
+
+---
+
+## Workflow
 
 ```text
 3.290 PDF-Dateien
@@ -37,72 +64,88 @@ und Erzeugung NHM-konformer Dateinamenvorschläge.
 Pakete à ca. 200 PDFs
         │
         ▼
-PyMuPDF Textextraktion
+Textextraktion mit PyMuPDF
         │
         ▼
-max. 15.000 Zeichen
+Begrenzung auf 15.000 Zeichen
         │
         ▼
 Lokales LLM
-(gpt.nhm.at:8080)
         │
         ▼
-Extraktion von
-Autor*innen* Jahr und Titel
+Extraktion von Autor*innen,
+Publikationsjahr und Titel
+*       │
+        ▼
+Erzeugung*eines NH*-konformen
+Dateinamenv*rschlags
         │
-        **NHM-Dateinam*nvorschlag
+        ▼
+CSV*Ausgabe
         │
-       *▼
-CSV-Ausgabe
-        │
-       *▼
-Gesamtauswertung
-      */ \
-      /   \
-    *▼     ▼
+        ▼
+Ges*mtauswertung
+       / \
+      /*  \
+     ▼    *▼
 
--        2.385 automatisch* zugeordnet
--        905 manuell nachzubearbeiten
+2.385 automatisch     *905 manuell
+zugeordnet            *nachzubearbeiten
+```
 
-##*Vorgehensweise
+---
 
-1. PDF-Dateien mit **PyMuPDF** einlesen.
-2. Text aus den Dokumenten extrahieren.
-3. Extrahierten Text auf maximal 15.000 Zeichen begrenzen:
+## Tech**scher Ansatz
+
+1* Einlesen der PDF-Dateien*mit PyMuPDF
+2. Extraktion des*Volltext*s
+3. Begrenzung auf maximal *5.000 Zeichen
 
 ```python
 text =*text[:15000]
 ```
 
-4. Übermittlung des Textes an ein lokales LM
-5. Extraktion von:
-   - Nach*amen
-   - Initialen
+4. Über*ittlung des Textes an ein lokales *LM*5. Extraktion von:
+   - Autor*nnen und Autoren
+   - Initial*n
    - Publikationsjahr
-   - Titel
-6. Erzeugung eines NHM-konformen Dateinamens
-7. Speicherung der Ergebnisse in einer CSV-Date.
+   -*Titel
+6. Erzeugung eines NHM*konformen Dateinamens
+7. Speicheru*g der*Ergebnisse in einer CSV-Datei
 
-## Namenskon*ention
+---*
+## Ergebnisse*
+| Kennzahl | Wert |
+|-----------*------:|
+| Verarbeitete PDF-Date*en | 3.290 |
+| Automatisch*zugeordnet | 2.385 |
+| Man*ell nachzubearbeiten | 905 |
+|*Automatische Erkennungsquote | 72,* % |
 
-### Eine Autorin /*ein Autor
+Die Verarbeitung erfolgte in*Pak*ten von jeweils etwa 200 PDF*Dateien mit einer durchschnittlich*n Laufzeit*von rund 20 Minuten pro Paket.
 
-```text
-Nach*ame_Initialen_Jahr_Titelwort_Titelwort2_Titel*ort3_Titelwort4_Titelwort5.pdf
-```
+--*
 
-Beispiel:
+## Verwendete Technologien
 
-```text*Mah_CL_2006_A_new_species_of*Xyloplax.pdf
-```
+- Py*hon
+- PyMuPDF*- Requests
+- Pandas
+- Lok*les Large Language Model (LLM)
 
-### Zwei*Autor*innen
+--*
 
-```text
-Nachname1_Initialen_&_Nachname2_Initialen_Jahr_Titel.pdf
-``*
+##*Projektstatus
 
-Beispiel:
+Proof of*Concept / Forschungs-*und Automatisierungsprojekt
 
-```text
-Lawrence_JM_&_Pomory_CM_1999_Anterior-posterior_asymmetry_in_th**
+*as Projekt zeigt, dass sich*ein großer Bestand*wissenschaftlicher PDF-Dateien mit*vert*etbarem Aufwand automatisiert anal*s*eren und nach einer einheitlichen *onvention benennen lässt.*Durch die automatische*Verarbeitung konnten mehr als zwei*Dritt*l der Dateien ohne manuelle Recher*he*zugeordnet werden.
+
+---
+
+##*Mögliche Weiterentwicklungen*
+- Analyse ausschließlich der erst*n ein*bis zwei Seiten
+- Off*zielle API-An*indung statt Session-Token
+- Verbe*ser*e Behandlung von OCR* und Scan-Dokumenten
+* Automatische Um*enennung nach manueller Freigabe
+-*Integration in bestehende NHM-*orkflows
