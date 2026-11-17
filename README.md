@@ -73,79 +73,82 @@ Begrenzung auf 15.000 Zeichen
 Lokales LLM
         │
         ▼
-Extraktion von Autor*innen,
+Extraktion von Autorinnen und Autoren,
 Publikationsjahr und Titel
-*       │
-        ▼
-Erzeugung*eines NH*-konformen
-Dateinamenv*rschlags
         │
         ▼
-CSV*Ausgabe
+Erzeugung eines NHM-konformen
+Dateinamenvorschlags
         │
         ▼
-Ges*mtauswertung
+CSV-Ausgabe
+        │
+        ▼
+Gesamtauswertung
        / \
-      /*  \
-     ▼    *▼
+      /   \
+     ▼     ▼
 
-2.385 automatisch     *905 manuell
-zugeordnet            *nachzubearbeiten
+2.385 automatisch            905 manuell
+zugeordnet                   nachzubearbeiten
 ```
 
 ---
 
-## Tech**scher Ansatz
+## Technischer Ansatz
 
-1* Einlesen der PDF-Dateien*mit PyMuPDF
-2. Extraktion des*Volltext*s
-3. Begrenzung auf maximal *5.000 Zeichen
+1. Einlesen der PDF-Dateien mit PyMuPDF
+2. Extraktion des Volltextes
+3. Begrenzung auf maximal 15.000 Zeichen
 
 ```python
-text =*text[:15000]
+text = text[:15000]
 ```
 
-4. Über*ittlung des Textes an ein lokales *LM*5. Extraktion von:
-   - Autor*nnen und Autoren
-   - Initial*n
+4. Übermittlung des Textes an ein lokales LLM
+5. Extraktion von:
+   - Autorinnen und Autoren
+   - Initialen
    - Publikationsjahr
-   -*Titel
-6. Erzeugung eines NHM*konformen Dateinamens
-7. Speicheru*g der*Ergebnisse in einer CSV-Datei
+   - Titel
+6. Erzeugung eines NHM-konformen Dateinamens
+7. Speicherung der Ergebnisse in einer CSV-Datei
 
----*
-## Ergebnisse*
+---
+
+## Ergebnisse
+
 | Kennzahl | Wert |
-|-----------*------:|
-| Verarbeitete PDF-Date*en | 3.290 |
-| Automatisch*zugeordnet | 2.385 |
-| Man*ell nachzubearbeiten | 905 |
-|*Automatische Erkennungsquote | 72,* % |
+|-----------|------:|
+| Verarbeitete PDF-Dateien | 3.290 |
+| Automatisch zugeordnet | 2.385 |
+| Manuell nachzubearbeiten | 905 |
+| Automatische Erkennungsquote | 72,5 % |
 
-Die Verarbeitung erfolgte in*Pak*ten von jeweils etwa 200 PDF*Dateien mit einer durchschnittlich*n Laufzeit*von rund 20 Minuten pro Paket.
+Die Verarbeitung erfolgte in Paketen von jeweils etwa 200 PDF-Dateien mit einer durchschnittlichen Laufzeit von rund 20 Minuten pro Paket.
 
---*
+---
 
 ## Verwendete Technologien
 
-- Py*hon
-- PyMuPDF*- Requests
+- Python
+- PyMuPDF
+- Requests
 - Pandas
-- Lok*les Large Language Model (LLM)
-
---*
-
-##*Projektstatus
-
-Proof of*Concept / Forschungs-*und Automatisierungsprojekt
-
-*as Projekt zeigt, dass sich*ein großer Bestand*wissenschaftlicher PDF-Dateien mit*vert*etbarem Aufwand automatisiert anal*s*eren und nach einer einheitlichen *onvention benennen lässt.*Durch die automatische*Verarbeitung konnten mehr als zwei*Dritt*l der Dateien ohne manuelle Recher*he*zugeordnet werden.
+- Lokales Large Language Model (LLM)
 
 ---
 
-##*Mögliche Weiterentwicklungen*
-- Analyse ausschließlich der erst*n ein*bis zwei Seiten
-- Off*zielle API-An*indung statt Session-Token
-- Verbe*ser*e Behandlung von OCR* und Scan-Dokumenten
-* Automatische Um*enennung nach manueller Freigabe
--*Integration in bestehende NHM-*orkflows
+## Projektstatus
+
+Proof of Concept / Forschungs- und Automatisierungsprojekt
+
+Das Projekt zeigt, dass sich ein großer Bestand wissenschaftlicher PDF-Dateien mit vertretbarem Aufwand automatisiert analysieren und nach einer einheitlichen Konvention benennen lässt. Durch die automatische Verarbeitung konnten mehr als zwei Drittel der Dateien ohne manuelle Recherche zugeordnet werden.
+
+---
+
+## Mögliche Weiterentwicklungen
+
+- Analyse ausschließlich der ersten ein bis zwei Seiten
+- Offizielle API-Anbindung statt Session-Token
+- Verbesserte Behandlung von OCR- und
