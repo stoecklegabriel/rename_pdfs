@@ -1,7 +1,7 @@
 NHM PDF Renamer
 Python-Skript zur automatischen Ermittlung NHM-konformer Dateinamen aus wissenschaftlichen PDF-Dateien.
 
-Ziel
+Ziel:  
 Aus PDFs sollen automatisch
 
 Autor*innen
