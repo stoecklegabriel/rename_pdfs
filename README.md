@@ -61,11 +61,8 @@ Gesamtauswertung
       /   \
     *▼     ▼
 
-2.385 automatisch*zugeordnet
-
-905 man*ell
-nachzubearbeiten
-```
+-        2.385 automatisch* zugeordnet
+-        905 manuell nachzubearbeiten
 
 ##*Vorgehensweise
 
